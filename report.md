@@ -30,7 +30,9 @@ ALS finds about **0.37 observed relevant songs per 20 recommendations**. These a
 
 *Notebook cell 29. The gap shows a constraint of the frozen monthly task, not the cause of any model's errors.*
 
-**Why split by years?** The training-only lag-12 check supplied from Colab found **r = −0.19** for normalized monthly activity, so it does not support annual seasonality. Full-year 2018 validation and 2019 test windows provide chronological evaluation over comparable 12-month periods; a chronological split at a month or day boundary could also be valid.
+## Why split by years?
+
+The chronological **2014–2017 train → 2018 validation → 2019 test** split keeps later listens out of training and reserves 2019 for final evaluation. Complete validation and test years each cover all 12 calendar months, while the 2019 test checks whether a model trained through 2017 still works later. The training-only lag-12 result (**r = −0.19**) does not support annual seasonality as a reason for these cutoffs. A chronological month- or day-level split could also be valid for a model updated more often.
 
 **Conclusion:** Sparse supervision, limited target coverage, and an old fixed history make this *specific offline discovery task* difficult. The charts do not prove which factor caused the model scores. Logged plays also do not reveal whether users saw or enjoyed the recommended songs.
 
